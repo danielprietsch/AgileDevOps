@@ -1,11 +1,14 @@
 # AgileDevOps
+
 Procedure: 
-botstrap.yml >>
+
+botstrap.yml 
+
 Ansible Creates a Server with Docker Swarm Manager, ntp, cron tasks and postfix smtp relay (to send e-mail alerts);
-    
-    include firstdeploy.yml >>
-    
-    Git > (Jenkins Simulated Task) >  Docker > Swarm Cluster Start > Traefik Start (Load, Reverse, Logs)  > Nodejs         HighAvailability App Running...
+
+firstdeploy.yml
+
+Git > (Jenkins Simulated Task) >  Docker > Swarm Cluster Start > Traefik Start (Load, Reverse, Logs)  > Nodejs         HighAvailability App Running...
 
 MORE INFO:
 
