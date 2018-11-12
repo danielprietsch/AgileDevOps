@@ -1,0 +1,23 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "description": "Node App for Ansible Deploy Test",
+  "main": "hello.js",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielprietsch/NodeApp.git"
+  },
+  "author": "Daniel Prietch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielprietsch/NodeApp/issues"
+  },
+  "homepage": "https://github.com/danielprietsch/NodeApp#readme"
+}

@@ -1,0 +1,56 @@
+---
+- hosts: agiledevops
+  become: yes
+  tasks:
+
+  - name: Download NodeApp from github repo
+    git:
+      repo: 'https://github.com/danielprietsch/NodeApp.git'
+      dest: /tmp/NodeApp
+      force: yes
+      version: HEAD~
+
+  - name: Creates directory for crontab scripts /etc/crontabscripts
+    file: path=/etc/docker/volumes/NodeApp state=directory
+
+  - name: Copy the latest version to Countainer Volume
+    shell: cp -rf /tmp/NodeApp /etc/docker/volumes/
+
+  - name: Swarm up?
+    command: docker info
+    register: docker_info
+
+  - name: Swarm Init
+    command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
+    when: "docker_info.stdout.find('Swarm: active') == -1"
+
+#docker_info.stdout.find('Swarm: inactive"') == 1
+
+#docker_info.stdout.find('inactive') != 1
+
+  - name: Copy docker-compose.yml file to create stack AgileDevOps
+    copy:
+      src: /etc/docker/dockerfiles/solucao/docker-compose.yml
+      dest: /etc/docker/dockerfiles/solucao/docker-compose.yml
+
+  - name: Copy config.toml file for Traefik
+    copy:
+      src: /etc/docker/dockerfiles/solucao/config.toml
+      dest: /etc/docker/dockerfiles/solucao/config.toml
+
+#  - name: Need kill Containers?
+#    command: echo $(docker ps -q)
+#    register: docker_ps
+
+  - name: Killing all contairners to restart with new app
+    shell: docker kill $(docker ps -q)
+    when: "docker_info.stdout.find('Running: 0') == -1"
+
+#"docker_info.stdout.find('Running: 0') == 1"
+
+  - name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/solucao/docker-compose.yml
+    shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
+    args:
+      chdir: /etc/docker/dockerfiles/solucao
+
+

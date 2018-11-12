@@ -1,0 +1,179 @@
+---
+- hosts: agiledevops
+  become: true
+  pre_tasks: 
+
+  - name: Configure apt-get to use IPV4 because some errors on apt-get update
+    copy:
+      src: /etc/ansible/files/99force-ipv4
+      dest: /etc/apt/apt.conf.d/99force-ipv4
+
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=3600
+
+#  - name: Update apt 
+#    apt:
+#      upgrade: yes
+#      update_cache: yes
+
+
+  - name: Installing git, apt-transport-https, ca-certificates, curl, software-properties-common, 
+    apt:
+      name: ["git", "apt-transport-https", "ca-certificates", "curl", "software-properties-common"] 
+      state: latest
+
+  - name: Add Dockers official GPG key
+    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+  - name: apt-key fingerprint 0EBFCD88
+    shell: apt-key fingerprint 0EBFCD88
+
+
+  - name: Copy crontab file
+    copy:
+      src: /etc/ansible/files/scripts/aptkey.sh
+      dest: /tmp
+      mode: 0700
+
+  - name: run /tmp/aptkey.sh
+    shell: /tmp/aptkey.sh
+
+#  - name: Add Dockers official GPG key
+#    shell: "add-apt-repository \ "deb [arch=amd64] https://download.docker.com/linux/ubuntu \   $(lsb_release -cs) \   stable" 
+
+  - name: Update apt cache.
+    apt: update_cache=yes cache_valid_time=3600
+
+  - name: apt-get install  docker-ce 
+    apt:
+      name: ["docker-ce"]
+      state: latest
+
+#  - name: installing docker compose 
+#    shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+#  - name: chmod docker-compose
+#    shell: chmod +x /usr/local/bin/docker-compose
+
+#  - name: chmod docker-compose
+#    shell: cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+#  - name: Install the version '18.09' of package "docker"
+#    apt:
+#      name: docker=18.09
+
+#  - name: upgrade pip
+#    pip: 
+#      name: pip
+#      state: latest
+
+#  - name: Preventing erros on pip install -  export LC_ALL=C
+#    shell: export LC_ALL=C
+
+#  - name: Install pip docker
+#    pip:
+#      name: docker 
+#      state: latest
+
+# sudo apt-get install docker-compose=1.8.*
+#- name: Install docker-compose
+#  apt:
+#    name: docker-compose=1.8.*
+#    state: present
+#    update_cache: yes
+
+
+  roles:
+    - geerlingguy.ntp
+    - geerlingguy.postfix
+
+  vars_files:
+    - etc/ansible/vault/secret.yml
+
+  post_tasks:
+  
+  - name: Creates directory for crontab scripts /etc/crontabscripts
+    file: path=/etc/crontabscripts state=directory
+
+  - name: Copy crontab file
+    copy:
+      src: /etc/ansible/files/crontab
+      dest: /etc/crontab
+    notify: restart cron
+
+  - name: Copy script apacheHITcounts.sh to /etc/crontabscripts
+    copy:
+      src: /etc/ansible/files/scripts/apacheHITcounts.sh
+      dest: /etc/crontabscripts
+      owner: root
+      group: root
+      mode: u=rwx,g=r,o=r
+    notify: restart cron
+
+  - name: Creates directory for Docker Stack Deploy
+    file: path=/etc/docker/dockerfiles/solucao state=directory
+
+
+#  - name: Swarm up?
+#    command: docker service ls
+#    register: docker_service_ls
+
+#  - name: Swarm Init
+#    command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
+#    when: docker_service_ls.stdout.find('DESAFIO') == -1
+
+
+#- name: Start node.js app
+#  command: pm2 start /var/www/NodeApp/hello.js --name hello -i max
+#  become_user: vagrant
+#  when: pm2_list.stdout.find('hello') == -1
+
+#  - name: Create Swarm!
+#    shell: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
+
+#  - name: Init a new swarm with default parameters
+#    docker_swarm:
+#      state: present
+
+#  - name: Copy docker-compose.yml file to create stack DESAFIO
+#    copy:
+#      src: /etc/docker/dockerfiles/solucao/docker-compose.yml
+#      dest: /etc/docker/dockerfiles/solucao/docker-compose.yml
+
+#  - name: Copy config.toml file for Traefik
+#    copy:
+#      src: /etc/docker/dockerfiles/solucao/config.toml
+#      dest: /etc/docker/dockerfiles/solucao/config.toml
+
+#  - name: deploy DESAFIO stack from file /etc/docker/dockerfiles/solucao/docker-compose.yml
+#    shell: docker stack deploy --compose-file docker-compose.yml DESAFIO
+#    args:
+#      chdir: /etc/docker/dockerfiles/solucao
+
+#  - name: deploy DESAFIO stack from file
+#    docker_stack:
+#      state: present
+#      name: DESAFIO
+#      compose:
+#      - /etc/docker/dockerfiles/solucao/docker-compose.yml
+
+#  - name: Copy script testservices.sh to /etc/crontabscripts
+#    copy:
+#      src: /etc/ansible/files/scripts/testservices.sh
+#      dest: /etc/crontabscripts
+#      owner: root
+#      group: root
+#      mode: u=rwx,g=r,o=r
+#    notify: restart cron
+
+  handlers:
+  - name: restart cron
+    service:
+      name: cron
+      state: restarted
+
+- hosts: agiledevops
+  become: true
+  tasks:
+    - include_tasks: /etc/ansible/playbooks/deploy.yml
+  

@@ -1,0 +1,36 @@
+---
+- name: Ensure postfix is installed.
+  package:
+    name: postfix
+    state: latest
+
+- name: Creating /etc/postfix/sasl Directory 
+  file: path=/etc/postfix/sasl state=directory
+
+- name: Copying main.cf 
+  copy:
+    src: /etc/ansible/files/postfixconfig/main.cf
+    dest: /etc/postfix
+    owner: root
+    group: root
+    mode: u=rw,g=rw,o=r
+
+# Copping SASL
+- name: Copy sasl pw
+  tags: sasl_pw
+  copy:
+    content: "{{ item.content }}"
+    dest: "/etc/postfix/sasl/{{ item.name }}"
+    owner: root
+    group: root
+    mode: "u=rw"
+  become: yes
+  with_items:
+    - "{{ sasl }}"
+  notify: restart postfix
+
+- name: Ensure postfix is started and enabled at boot.
+  service:
+    name: postfix
+    state: started
+    enabled: yes

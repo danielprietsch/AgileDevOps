@@ -1,0 +1,32 @@
+---
+- name: postmap sals_passwd
+  command: postmap /etc/postfix/sasl/sasl_passwd 
+  listen: restart postfix
+
+- name: postmap main.cf
+  command: postmap /etc/postfix/main.cf 
+  listen: restart postfix
+
+- name: chown sasl_passwd
+  file:
+    path: /etc/postfix/sasl/sasl_passwd
+    owner: root
+    group: root
+    mode: 0600
+  listen: restart postfix
+
+- name: chown sasl_passwd.db
+  file:
+    path: /etc/postfix/sasl/sasl_passwd.db
+    owner: root
+    group: root
+    mode: 0600
+  listen: restart postfix
+
+- name: restart postfix server
+  service: name=postfix state=reloaded
+  listen: restart postfix
+
+- name: restart postfix server
+  service: name=postfix state=restarted
+  listen: restart postfix
