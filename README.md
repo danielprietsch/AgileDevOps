@@ -9,9 +9,9 @@ Codename: bionic
 
 # OVERVIEW
 
->> botstrap.yml Ansible Playbook Creates a Server with Docker Swarm Manager, cron tasks and postfix smtp relay (to send e-mail alerts);
+The Ansible Playbook botstrap.yml Creates a Server with Docker Swarm Manager, cron tasks and postfix smtp relay (to send e-mail alerts);
 
->> firstdeploy.yml Ansible Playbook starts a Deploy of AgileDevOps Solution: >> Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
+The Ansible Playbook firstdeploy.yml starts a Deploy of AgileDevOps Solution: >> Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
 ![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
