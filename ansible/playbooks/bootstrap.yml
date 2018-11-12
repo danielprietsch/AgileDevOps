@@ -84,7 +84,7 @@
 
 
   roles:
-    - geerlingguy.ntp
+  #  - geerlingguy.ntp
     - geerlingguy.postfix
 
   vars_files:
