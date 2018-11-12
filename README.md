@@ -12,6 +12,9 @@ Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (B
 
 MORE INFO:
 
+To scale the nodejs container to 10 instances: 
+#docker service scale AgileDevOps_nodejs=10
+
 Tree Directoryies:
 
 /AgileDevOps
