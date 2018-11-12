@@ -38,11 +38,13 @@ Install Python for the Ansible can work
 
     # apt-get install ansible
     
-5- Download the git repository with the Ansible Playbooks in your Linux /tmp:
+5- Download the git repository AgileDevOps Solution in your Linux /tmp:
 
     # git clone https://github.com/danielprietsch/AgileDevOps.git /tmp/AgileDevOps
 
-6- Edit the file /tmp/AgileDevOps/hosts and include your VM Machine IP:
+6- Edit and save the file /tmp/AgileDevOps/ansible/hosts and include your VM Machine IP:
+
+    # vi /tmp/AgileDevOps/ansible/hosts
 
     [agiledevops]
     MY_VM_IP
@@ -127,7 +129,9 @@ Tree Directoryies:
         scripts:
             aptkey.sh: Used on docker installation
             testservices.sh: Using to test docker swarm and docker pid to restart
-                        
+        
+        roles:
+             
         playbooks:
             bootstrap.yml:
             firstdeploy.yml: 
