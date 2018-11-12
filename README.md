@@ -2,10 +2,10 @@
 
 AVAILABLE:
 
-Distributor ID:	Ubuntu
-Description:	Ubuntu 18.04.1 LTS
-Release:	18.04
-Codename:	bionic
+Distributor ID:	Ubuntu \n
+Description:	Ubuntu 18.04.1 LTS\n
+Release:	18.04\n
+Codename:	bionic\n
 
 # OVERVIEW
 
