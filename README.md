@@ -10,9 +10,65 @@ firstdeploy.yml
 
 Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
-MORE INFO:
+STEPS:
 
-To scale the nodejs container to 10 instances: 
+# Creating Environment
+
+1- Create the virtual machine for the AgileDevOps Solution on your Partner or locally (Azure, AWS, Vagrant, VirtualBox, etc...)
+
+# On the remote VM
+
+2- Create the user "vagrant" for SSH access and verify if it has IP connectivity and redirect inbound ports 22 (ssh), 443 (https) and 80 (http) and 8080 (traefik panel) for this server;
+
+3 - Install Python on your virtual Machine and enabled the ssh Password authentication:
+
+Uncomment this line:
+
+    # vi /etc/ssh/sshd_config
+    
+    PasswordAuthentication yes
+
+Install Python for the Ansible can work
+
+    # apt-get install python
+
+# On your Machine (Ansible Controller)
+
+4- Install Ansible (Controller) on your Linux.
+
+    # apt-get install ansible
+    
+5- Download the git repository with the Ansible Playbooks in your Linux /tmp:
+
+    # git clone https://github.com/danielprietsch/AgileDevOps.git /tmp/AgileDevOps
+
+6- Edit the file /tmp/AgileDevOps/hosts and include your VM Machine IP:
+
+    [agiledevops]
+    MY_VM_IP
+
+    Example:
+    [agiledevops]
+    192.168.20.21
+
+7 - Got to /tmp/AgileDevOps
+
+    # cd /tmp/AgileDevOps
+
+8 - Run the playbook bootstrap.yml with the parameters above:
+VAULT PASSWORD = 123456 
+
+     # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
+
+9 - To run a deploy without running the basics tasks in bootstrap, run only the deploy.yml playbook:
+
+    # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
+
+10 - To perform the rollback to the previous version of the NodeApp application in the GIT (HEAD~), run the playbook below:
+
+    # ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
+
+11 - To scale the nodejs container to 10 instances: 
 
     # docker service scale AgileDevOps_nodejs=10
     
@@ -30,7 +86,26 @@ To scale the nodejs container to 10 instances:
     10/10: running   [==================================================>] 
     verify: Service converged 
     
+12 - To permanent scale the nodejs container to 10 instances:
+Edit the /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
+
+    # vi /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
+
+Change the line:
+
+    # replicas: 2 
+to
+
+    # replicas: 10 
     
+... and run the STEP #9 again
+    
+    # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
+
+====================================================
+
+EXTRA INFO:
+  
 Tree Directoryies:
 
 /AgileDevOps
@@ -72,8 +147,10 @@ Tree Directoryies:
         volumes:
             Jenkins: Simulating the Jenkins build
             NodeApp: Receiveis the build and stable version of NodeApp from Jenkins
-            
-
-      
-   
-        
+                 hello.js: Nodejs + Express App;
+                 package.json: Including express depencies to npm/yarn install;
+                 node_modules: All modules downloaded by npm/yarn
+              
+ Author: Daniel Prietsch daniel@nuvemtecnologia.com       
+ http://nuvemtecnologia.com
+ 
