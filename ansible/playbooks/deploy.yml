@@ -1,18 +1,30 @@
 ---
-- name: Download NodeApp from github repo
+- name: Creates directory for Docker Stack Deploy
+  file: path=/etc/docker/dockerfiles/AgileDevOps state=directory
+
+- name: Creates directory for NodeApp Production
+  file: path=/etc/docker/volumes/NodeApp state=directory
+
+- name: Creates directory for Jenkins Tests
+  file: path=/tmp/Jenkins state=directory
+
+- name: Creates directory for Jenkins Buil OK
+  file: path=/etc/docker/volumes/Jenkins state=directory
+
+- name: SIMULATING JENKINS OPERATION: Download NodeApp from github repo
   git:
     repo: 'https://github.com/danielprietsch/NodeApp.git'
-    dest: /tmp/NodeApp
+    dest: /tmp/Jenkins
     force: yes
     version: HEAD
 
-- name: Creates directory for crontab scripts /etc/crontabscripts
-  file: path=/etc/docker/volumes/NodeApp state=directory
+- name: SIMULATING JENKINS OPERATION: Testing NodeApp.. Ok... Copying to Builded Directory 
+  shell: cp -rf /tmp/Jenkins /etc/docker/volumes/Jenkins
 
-- name: Copy the latest version to Countainer Volume
-  shell: cp -rf /tmp/NodeApp /etc/docker/volumes/
+- name: SIMULATING JENKINS OPERATION: Copying builded app to NodeApp Production
+  shell: cp -rf /etc/docker/volumes/Jenkins /etc/docker/volumes/NodeApp
 
-- name: Swarm up?
+- name: Collecting info from docker info command ... Swarm UP?
   command: docker info
   register: docker_info
 
@@ -22,20 +34,20 @@
 
 - name: Copy docker-compose.yml file to create stack AgileDevOps
   copy:
-    src: /etc/docker/dockerfiles/solucao/docker-compose.yml
-    dest: /etc/docker/dockerfiles/solucao/docker-compose.yml
+    src: docker/dockerfiles/AgileDevOps/docker-compose.yml
+    dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
 - name: Copy config.toml file for Traefik
   copy:
-    src: /etc/docker/dockerfiles/solucao/config.toml
-    dest: /etc/docker/dockerfiles/solucao/config.toml
+    src: docker/dockerfiles/AgileDevOps/config.toml
+    dest: /etc/docker/dockerfiles/AgileDevOps/config.toml
 
 - name: Killing all contairners to restart with new app
   shell: docker kill $(docker ps -q)
   when: "docker_info.stdout.find('Running: 0') == -1"
 
-- name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/solucao/docker-compose.yml
+- name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
   shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
   args:
-    chdir: /etc/docker/dockerfiles/solucao
+    chdir: /etc/docker/dockerfiles/AgileDevOps
 

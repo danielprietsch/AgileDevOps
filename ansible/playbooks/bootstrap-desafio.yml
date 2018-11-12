@@ -5,7 +5,7 @@
 
   - name: Configure apt-get to use IPV4 because some errors on apt-get update
     copy:
-      src: /etc/ansible/files/99force-ipv4
+      src: ansible/files/99force-ipv4
       dest: /etc/apt/apt.conf.d/99force-ipv4
 
   - name: Update apt cache.
@@ -29,9 +29,9 @@
     shell: apt-key fingerprint 0EBFCD88
 
 
-  - name: Copy crontab file
+  - name: Copy apt-key.sh script for docker installation
     copy:
-      src: /etc/ansible/files/scripts/aptkey.sh
+      src: ansible/files/scripts/aptkey.sh
       dest: /tmp
       mode: 0700
 
@@ -88,7 +88,7 @@
     - geerlingguy.postfix
 
   vars_files:
-    - etc/ansible/vault/secret.yml
+    - ansible/vault/secret.yml
 
   post_tasks:
   
@@ -97,22 +97,18 @@
 
   - name: Copy crontab file
     copy:
-      src: /etc/ansible/files/crontab
+      src: ansible/files/crontab
       dest: /etc/crontab
     notify: restart cron
 
-  - name: Copy script apacheHITcounts.sh to /etc/crontabscripts
+  - name: Copy script TRAEFIK LOGGER
     copy:
-      src: /etc/ansible/files/scripts/apacheHITcounts.sh
+      src: ansible/files/scripts/traefiklogger.sh
       dest: /etc/crontabscripts
       owner: root
       group: root
       mode: u=rwx,g=r,o=r
     notify: restart cron
-
-  - name: Creates directory for Docker Stack Deploy
-    file: path=/etc/docker/dockerfiles/solucao state=directory
-
 
 #  - name: Swarm up?
 #    command: docker service ls
