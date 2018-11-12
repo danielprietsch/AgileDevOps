@@ -161,3 +161,8 @@ Tree Directoryies:
  daniel@nuvemtecnologia.com       
  http://nuvemtecnologia.com
  
+ # Need help with:
+# - HTTPS SSL Certificates and Redirecting
+# - Copy the Traefik logs to volume in Linux (not in container)
+# - Parse Traefik logs?
+# - Creating a real Jenkins test.
