@@ -75,25 +75,10 @@ VAULT PASSWORD = 123456
 
     # ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
 
-11 - To scale the nodejs container to 10 instances: 
 
-    # docker service scale AgileDevOps_nodejs=10
-    
-    AgileDevOps_nodejs scaled to 10
-    overall progress: 10 out of 10 tasks 
-    1/10: running   [==================================================>] 
-    2/10: running   [==================================================>] 
-    3/10: running   [==================================================>] 
-    4/10: running   [==================================================>] 
-    5/10: running   [==================================================>] 
-    6/10: running   [==================================================>] 
-    7/10: running   [==================================================>] 
-    8/10: running   [==================================================>] 
-    9/10: running   [==================================================>] 
-    10/10: running   [==================================================>] 
-    verify: Service converged 
-    
-12 - To permanent scale the nodejs container to 10 instances:
+# OPTIONAL:
+
+11 - To permanent scale the nodejs container to 10 instances:
 Edit the /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
     # vi /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
@@ -109,8 +94,7 @@ to
     
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
-# OPTIONAL:
-You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
+12 - You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
 
 ====================================================
 
