@@ -39,7 +39,8 @@ Tree Directoryies:
             firstdeploy.yml: 
             deploy.yml: same as firstdeploy.yml but you can run only deploy ;
             rollback.yml: Rollback App to HEAD~ git version;
-    
+        vault: 
+                secret.yml: have the password to postfix smtp relay with desafiolinux@gmail.com
     docker:
         dockerfiles:
             AgileDevOps:
