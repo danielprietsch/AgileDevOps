@@ -1,25 +1,19 @@
 # AgileDevOps Solution
 
-# AVAILABLE:
-# Distributor ID:	Ubuntu
-# Description:	Ubuntu 18.04.1 LTS
-# Release:	18.04
-# Codename:	bionic
-
-=================
+AVAILABLE:
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.1 LTS
+Release:	18.04
+Codename:	bionic
 
 # OVERVIEW
 
+>> botstrap.yml Ansible Playbook Creates a Server with Docker Swarm Manager, cron tasks and postfix smtp relay (to send e-mail alerts);
 
-Procedure: 
+>> firstdeploy.yml Ansible Playbook starts a Deploy of AgileDevOps Solution: >> Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
-botstrap.yml 
+![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
-Ansible Creates a Server with Docker Swarm Manager, ntp, cron tasks and postfix smtp relay (to send e-mail alerts);
-
-firstdeploy.yml
-
-Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
 ============================
 
