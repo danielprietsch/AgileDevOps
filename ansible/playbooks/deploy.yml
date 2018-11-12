@@ -3,18 +3,18 @@
   become: yes
   tasks:
 
-  - name: SIMULATING JENKINS OPERATION DEPLOY: Download NodeApp from github repo VERSION HEAD
+  - name: "SIMULATING JENKINS OPERATION: Download NodeApp from github repo"
     git:
       repo: 'https://github.com/danielprietsch/NodeApp.git'
       dest: /tmp/Jenkins
       force: yes
       version: HEAD
 
-  - name: SIMULATING JENKINS OPERATION: Testing NodeApp.. Ok... Copying to Builded Directory 
-    shell: cp -rf /tmp/Jenkins /etc/docker/volumes/Jenkins
+  - name: "SIMULATING JENKINS OPERATION: Testing NodeApp.. Ok... Copying to Builded Directory" 
+    shell: cp -rf /tmp/Jenkins/* /etc/docker/volumes/Jenkins/
 
-  - name: SIMULATING JENKINS OPERATION: Copying builded app to NodeApp Production
-    shell: cp -rf /etc/docker/volumes/Jenkins /etc/docker/volumes/NodeApp
+  - name: "SIMULATING JENKINS OPERATION: Copying builded app to NodeApp Production"
+    shell: cp -rf /etc/docker/volumes/Jenkins/* /etc/docker/volumes/NodeApp/
 
   - name: Collecting info from docker info command ... Swarm UP?
     command: docker info
@@ -26,18 +26,20 @@
 
   - name: Copy docker-compose.yml file to create stack AgileDevOps
     copy:
-      src: docker/dockerfiles/AgileDevOps/docker-compose.yml
+      src: ../../docker/dockerfiles/AgileDevOps/docker-compose.yml
       dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
   - name: Copy config.toml file for Traefik
     copy:
-      src: docker/dockerfiles/AgileDevOps/config.toml
+      src: ../../docker/dockerfiles/AgileDevOps/config.toml
       dest: /etc/docker/dockerfiles/AgileDevOps/config.toml
 
   - name: Killing all contairners to restart with new app
     shell: docker kill $(docker ps -q)
     when: "docker_info.stdout.find('Running: 0') == -1"
 
-  - name: Deploying ... reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
+  - name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
     shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
+    args:
+      chdir: /etc/docker/dockerfiles/AgileDevOps
 

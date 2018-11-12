@@ -5,7 +5,7 @@
 
   - name: Configure apt-get to use IPV4 because some errors on apt-get update
     copy:
-      src: ansible/files/99force-ipv4
+      src: ../files/99force-ipv4
       dest: /etc/apt/apt.conf.d/99force-ipv4
 
   - name: Update apt cache.
@@ -31,7 +31,7 @@
 
   - name: Copy apt-key.sh script for docker installation
     copy:
-      src: ansible/files/scripts/aptkey.sh
+      src: ../files/scripts/aptkey.sh
       dest: /tmp
       mode: 0700
 
@@ -88,7 +88,7 @@
     - geerlingguy.postfix
 
   vars_files:
-    - ansible/vault/secret.yml
+    - ../../ansible/vault/secret.yml
 
   post_tasks:
   
@@ -97,13 +97,13 @@
 
   - name: Copy crontab file
     copy:
-      src: ansible/files/crontab
+      src: ../files/crontab
       dest: /etc/crontab
     notify: restart cron
 
-  - name: Copy script TRAEFIK LOGGER
+  - name: Copy script TRAEFIK LOGGER COUNT
     copy:
-      src: ansible/files/scripts/traefiklogger.sh
+      src: ../files/scripts/traefiklogger.sh
       dest: /etc/crontabscripts
       owner: root
       group: root
@@ -171,5 +171,5 @@
 - hosts: agiledevops
   become: true
   tasks:
-    - include_tasks: /etc/ansible/playbooks/firstdeploy.yml
+    - include_tasks: firstdeploy.yml
   

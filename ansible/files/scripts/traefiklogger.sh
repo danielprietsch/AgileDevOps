@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# NEED A SCRIPT TO PARSE THE TRAEFIK LOGS!!!!
+
+

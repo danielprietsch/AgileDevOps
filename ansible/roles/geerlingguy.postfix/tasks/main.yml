@@ -9,7 +9,7 @@
 
 - name: Copying main.cf 
   copy:
-    src: /etc/ansible/files/postfixconfig/main.cf
+    src: ../files/postfixconfig/main.cf
     dest: /etc/postfix
     owner: root
     group: root
