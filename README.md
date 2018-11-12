@@ -1,5 +1,6 @@
 # AgileDevOps
- 
+
+=================
 Procedure: 
 
 botstrap.yml 
@@ -10,7 +11,10 @@ firstdeploy.yml
 
 Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
-STEPS:
+============================
+
+
+# STEPS:
 
 # Creating Environment
 
@@ -104,9 +108,12 @@ to
     
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
+# OPTIONAL:
+You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
+
 ====================================================
 
-EXTRA INFO:
+# EXTRA INFO:
   
 Tree Directoryies:
 
