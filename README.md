@@ -1,8 +1,15 @@
-# AgileDevOps
+# AgileDevOps Solution
 
-# TESTED ON UBUNTU18 BIONIC
+# AVAILABLE:
+# Distributor ID:	Ubuntu
+# Description:	Ubuntu 18.04.1 LTS
+# Release:	18.04
+# Codename:	bionic
 
 =================
+
+# OVERVIEW
+
 
 Procedure: 
 
