@@ -1,6 +1,7 @@
 # AgileDevOps Solution
 
 AVAILABLE:
+
 Distributor ID:	Ubuntu
 Description:	Ubuntu 18.04.1 LTS
 Release:	18.04
