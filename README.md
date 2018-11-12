@@ -67,6 +67,15 @@ VAULT PASSWORD = 123456
 
      # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
+# IMPORTANT: Wait for the docker images to download, this may take about 5 minutes depending on your connection.
+
+# TEST NOW! \o/
+        # http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
+        # http://REMOTE-VM-IP:8080 (Traefik Panel)
+
+
+# OPTIONAL:
+
 9 - To run a deploy without running the basics tasks in bootstrap, run only the deploy.yml playbook:
 
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
@@ -74,9 +83,6 @@ VAULT PASSWORD = 123456
 10 - To perform the rollback to the previous version of the NodeApp application in the GIT (HEAD~), run the playbook below:
 
     # ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
-
-
-# OPTIONAL:
 
 11 - To permanent scale the nodejs container to 10 instances:
 Edit the /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
