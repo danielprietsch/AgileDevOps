@@ -14,7 +14,8 @@ MORE INFO:
 
 To scale the nodejs container to 10 instances: 
 
-    docker service scale AgileDevOps_nodejs=10
+    # docker service scale AgileDevOps_nodejs=10
+    
     AgileDevOps_nodejs scaled to 10
     overall progress: 10 out of 10 tasks 
     1/10: running   [==================================================>] 
