@@ -171,5 +171,5 @@
 - hosts: agiledevops
   become: true
   tasks:
-    - include_tasks: /etc/ansible/playbooks/deploy.yml
+    - include_tasks: /etc/ansible/playbooks/firstdeploy.yml
   
