@@ -163,6 +163,7 @@ Tree Directoryies:
                  package.json: Including express depencies to npm/yarn install;
                  node_modules: All modules downloaded by npm/yarn
               
- Author: Daniel Prietsch daniel@nuvemtecnologia.com       
+ Author: Daniel Prietsch
+ daniel@nuvemtecnologia.com       
  http://nuvemtecnologia.com
  
