@@ -1,6 +1,15 @@
-# AgileDevOps
+# AgileDevOps Solution
+
+# AVAILABLE:
+# Distributor ID:	Ubuntu
+# Description:	Ubuntu 18.04.1 LTS
+# Release:	18.04
+# Codename:	bionic
 
 =================
+
+# OVERVIEW
+
 
 Procedure: 
 
@@ -67,6 +76,15 @@ VAULT PASSWORD = 123456
 
      # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
+# IMPORTANT: Wait for the docker images to download, this may take about 5 minutes depending on your connection.
+
+# TEST NOW! \o/
+        # http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
+        # http://REMOTE-VM-IP:8080 (Traefik Panel)
+
+
+# OPTIONAL:
+
 9 - To run a deploy without running the basics tasks in bootstrap, run only the deploy.yml playbook:
 
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
@@ -75,25 +93,7 @@ VAULT PASSWORD = 123456
 
     # ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
 
-11 - To scale the nodejs container to 10 instances: 
-
-    # docker service scale AgileDevOps_nodejs=10
-    
-    AgileDevOps_nodejs scaled to 10
-    overall progress: 10 out of 10 tasks 
-    1/10: running   [==================================================>] 
-    2/10: running   [==================================================>] 
-    3/10: running   [==================================================>] 
-    4/10: running   [==================================================>] 
-    5/10: running   [==================================================>] 
-    6/10: running   [==================================================>] 
-    7/10: running   [==================================================>] 
-    8/10: running   [==================================================>] 
-    9/10: running   [==================================================>] 
-    10/10: running   [==================================================>] 
-    verify: Service converged 
-    
-12 - To permanent scale the nodejs container to 10 instances:
+11 - To permanent scale the nodejs container to 10 instances:
 Edit the /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
     # vi /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
@@ -109,8 +109,7 @@ to
     
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
-# OPTIONAL:
-You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
+12 - You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
 
 ====================================================
 
@@ -163,6 +162,7 @@ Tree Directoryies:
                  package.json: Including express depencies to npm/yarn install;
                  node_modules: All modules downloaded by npm/yarn
               
- Author: Daniel Prietsch daniel@nuvemtecnologia.com       
+ Author: Daniel Prietsch
+ daniel@nuvemtecnologia.com       
  http://nuvemtecnologia.com
  
