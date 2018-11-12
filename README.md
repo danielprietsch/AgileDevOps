@@ -8,7 +8,7 @@ Ansible Creates a Server with Docker Swarm Manager, ntp, cron tasks and postfix 
 
 firstdeploy.yml
 
-Git > (Jenkins Simulated Task) >  Docker > Swarm Cluster Start > Traefik Start (Load, Reverse, Logs)  > Nodejs         HighAvailability App Running...
+Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
 
 MORE INFO:
 
