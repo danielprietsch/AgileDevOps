@@ -5,10 +5,21 @@ Available: Ubuntu 18.04.1 LTS bionic
 
 # OVERVIEW
 
-The Ansible Playbook botstrap.yml Creates a Server with Docker Swarm Manager, cron tasks and postfix smtp relay (to send e-mail alerts);
+The AgileDevOps solution aims to create the entire workflow, tests and build of the NODEJS application (hello.js) until its deploy, realizing the provisioning of docker containers in swarm mode (cluster), where Traefik performs load balancing and reverse proxy. 
+This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. 
+NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature.
+Helps are very welcome! :D
 
-The Ansible Playbook firstdeploy.yml starts a Deploy of AgileDevOps Solution: >> Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
-
+AUTOMATIZED PROCEDURE: 
+Starts Ansible Playbook botstrap.yml ... >>  
+Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >>
+Configuring Docker Swarm Manager ... >> 
+Starting Playbook firstdeploy.yml ...>>
+Starting AgileDevOps Solution ... >> 
+Git >  Jenkins Simulated Task > Docker >  Swarm Cluster > Traefik (Balancer + Reverse Proxy + Logs) >>
+Nodejs APP Starting... OK! 
+\o/  :D
+ 
 ![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
 
