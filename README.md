@@ -5,7 +5,7 @@ Available: Ubuntu 18.04.1 LTS bionic
 
 # OVERVIEW
 
-The AgileDevOps solution aims to create the entire workflow, tests and build of the NODEJS application (hello.js) until its deploy, realizing the provisioning of docker containers in swarm mode (cluster), where Traefik performs load balancing and reverse proxy. 
+The AgileDevOps solution aims to create the entire workflow, tests and build of the NODEJS application (hello.js) until its deploy. Provisioning docker containers in swarm mode (cluster), where Traefik performs load balancing and reverse proxy. 
 This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. 
 NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature.
 Helps are very welcome! :D
