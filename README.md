@@ -78,7 +78,7 @@ VAULT PASSWORD = 123456
 
      # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
-# IMPORTANT: Wait for the docker images to download, this may take about 5 minutes depending on your connection.
+# IMPORTANT: Wait for the docker images to download, this may take about 1-5 minutes depending on your connection.
 
 # TEST NOW! \o/
         # http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
