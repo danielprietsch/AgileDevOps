@@ -165,14 +165,18 @@ Tree Directoryies:
                  node_modules: All modules downloaded by npm/yarn
               
  Author: Daniel Prietsch
- daniel@nuvemtecnologia.com       
+
+ daniel@nuvemtecnologia.com
+
  http://nuvemtecnologia.com
  
+
  Need help with:
  
 - Copy the Traefik logs to volume in Linux (not in container)
 - Parse Traefik logs?
 - Creating a real Jenkins test.
+
 
 Updates:
 
