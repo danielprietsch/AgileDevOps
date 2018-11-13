@@ -1,18 +1,25 @@
-# AgileDevOps Solution v1.0
+# AgileDevOps Solution
+Version: 1.1
 
-AVAILABLE:
-
-Distributor ID:	Ubuntu 
-Description: Ubuntu 18.04.1 LTS
-Release: 18.04
-Codename: bionic
+Available: Ubuntu 18.04.1 LTS bionic
 
 # OVERVIEW
 
-The Ansible Playbook botstrap.yml Creates a Server with Docker Swarm Manager, cron tasks and postfix smtp relay (to send e-mail alerts);
+The AgileDevOps solution aims to create the entire workflow, tests and build of the NODEJS application (hello.js) until its deploy. Provisioning docker containers in swarm mode (cluster), where Traefik performs load balancing and reverse proxy. 
+This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. 
+NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature.
+Helps are very welcome! :D
 
-The Ansible Playbook firstdeploy.yml starts a Deploy of AgileDevOps Solution: >> Git + (Jenkins Simulated Task) + Docker + Swarm Cluster Start + Traefik Start (Balancer + Reverse Proxy + Logs) + Nodejs HighAvailability App Running... \o/
-
+AUTOMATIZED PROCEDURE: 
+Starts Ansible Playbook botstrap.yml ... >>  
+Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >>
+Configuring Docker Swarm Manager ... >> 
+Starting Playbook firstdeploy.yml ...>>
+Starting AgileDevOps Solution ... >> 
+Git >  Jenkins Simulated Task > Docker >  Swarm Cluster > Traefik (Balancer + Reverse Proxy + Logs) >>
+Nodejs APP Starting... OK! 
+\o/  :D
+ 
 ![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
 
@@ -158,11 +165,19 @@ Tree Directoryies:
                  node_modules: All modules downloaded by npm/yarn
               
  Author: Daniel Prietsch
- daniel@nuvemtecnologia.com       
+
+ daniel@nuvemtecnologia.com
+
  http://nuvemtecnologia.com
  
- # Need help with:
-# - HTTPS SSL Certificates and Redirecting
-# - Copy the Traefik logs to volume in Linux (not in container)
-# - Parse Traefik logs?
-# - Creating a real Jenkins test.
+
+ Need help with:
+ 
+- Copy the Traefik logs to volume in Linux (not in container)
+- Parse Traefik logs?
+- Creating a real Jenkins test.
+
+
+Updates:
+
+1.1:  HTTPS Working with a invalid crt
