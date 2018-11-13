@@ -16,30 +16,42 @@
   - name: "SIMULATING JENKINS OPERATION: Copying builded app to NodeApp Production"
     shell: cp -rf /etc/docker/volumes/Jenkins/* /etc/docker/volumes/NodeApp/
 
+  - name: Checking docker daemon
+    service:
+      name: docker
+      state: started
+
   - name: Collecting info from docker info command ... Swarm UP?
     command: docker info
     register: docker_info
 
   - name: Swarm Init
-    command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
+    command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[-1] }}
     when: "docker_info.stdout.find('Swarm: active') == -1"
+
+  - name: Collecting info from docker network ls command ... Swarm UP?
+    command: docker network ls
+    register: docker_network_ls
+
+#  - name: Restart docker webgateway network --scope swarm
+#    command: docker network rm webgateway
+#    when: "docker_network_ls.stdout.find('webgateway') != -1"
+
+  - name: Creating docker network webgateway --scope swarm
+    command: docker network create webgateway --scope swarm
+    when: "docker_network_ls.stdout.find('webgateway') == -1"
 
   - name: Copy docker-compose.yml file to create stack AgileDevOps
     copy:
       src: ../../docker/dockerfiles/AgileDevOps/docker-compose.yml
       dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
-  - name: Copy config.toml file for Traefik
-    copy:
-      src: ../../docker/dockerfiles/AgileDevOps/config.toml
-      dest: /etc/docker/dockerfiles/AgileDevOps/config.toml
-
-  - name: Killing all contairners to restart with new app
-    shell: docker kill $(docker ps -q)
-    when: "docker_info.stdout.find('Running: 0') == -1"
-
   - name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
     shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
     args:
       chdir: /etc/docker/dockerfiles/AgileDevOps
+
+  - name: Killing all contairners to restart with new app
+    shell: docker kill $(docker ps -q)
+    when: "docker_info.stdout.find('Running: 0') == -1"
 

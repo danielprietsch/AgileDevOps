@@ -1,34 +1,43 @@
-version: "3.3"
- 
+version: "3"
 services:
-
-# TRAEFIK MAGIC
   traefik:
-    image: traefik:1.4
-    ports:
-      - 80:80
-      - 443:443
-      - 8080:8080
-    networks:
-      - traefik-net
+    image: traefik:1.5
+    command:
+      - "--api"
+      - "--entrypoints=Name:http Address::80"
+      - "--entrypoints=Name:https Address::443 TLS"
+      - "--defaultentrypoints=http,https"  
+      - "--docker"
+      - "--docker.swarmMode"
+      - "--docker.domain=nuvemtecnologia.com"
+      - "--docker.watch"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    configs:
-      - source: traefik-config
-        target: /etc/traefik/traefik.toml
+    networks:
+      - webgateway
+      - traefik
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
     deploy:
+      mode: global
       placement:
         constraints:
           - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
 
-# NODE.JS APP
   nodejs:
     image: danielprietsch/nodejs
     volumes:
       - /etc/docker/volumes/NodeApp:/data
 
     networks:
-      - traefik-net
+      - traefik
     deploy:
       replicas: 2
       placement:
@@ -38,11 +47,10 @@ services:
         - "traefik.port=3000"
         - "traefik.backend=/"
         - "traefik.frontend.rule=Path:/"
- 
+        
 networks:
-  traefik-net:
+  webgateway:
     driver: overlay
- 
-configs:
-  traefik-config:
-    file: config.toml
+    external: true
+  traefik:
+    driver: overlay

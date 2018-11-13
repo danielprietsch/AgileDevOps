@@ -11,12 +11,6 @@
   - name: Update apt cache.
     apt: update_cache=yes cache_valid_time=3600
 
-#  - name: Update apt 
-#    apt:
-#      upgrade: yes
-#      update_cache: yes
-
-
   - name: Installing git, apt-transport-https, ca-certificates, curl, software-properties-common, 
     apt:
       name: ["git", "apt-transport-https", "ca-certificates", "curl", "software-properties-common"] 
@@ -28,7 +22,6 @@
   - name: apt-key fingerprint 0EBFCD88
     shell: apt-key fingerprint 0EBFCD88
 
-
   - name: Copy apt-key.sh script for docker installation
     copy:
       src: ../files/scripts/aptkey.sh
@@ -37,9 +30,6 @@
 
   - name: run /tmp/aptkey.sh
     shell: /tmp/aptkey.sh
-
-#  - name: Add Dockers official GPG key
-#    shell: "add-apt-repository \ "deb [arch=amd64] https://download.docker.com/linux/ubuntu \   $(lsb_release -cs) \   stable" 
 
   - name: Update apt cache.
     apt: update_cache=yes cache_valid_time=3600
@@ -82,7 +72,6 @@
 #    state: present
 #    update_cache: yes
 
-
   roles:
   #  - geerlingguy.ntp
     - geerlingguy.postfix
@@ -108,59 +97,29 @@
       owner: root
       group: root
       mode: u=rwx,g=r,o=r
-    notify: restart cron
+#    notify: restart cron
 
-#  - name: Swarm up?
-#    command: docker service ls
-#    register: docker_service_ls
-
-#  - name: Swarm Init
-#    command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
-#    when: docker_service_ls.stdout.find('DESAFIO') == -1
-
-
-#- name: Start node.js app
-#  command: pm2 start /var/www/NodeApp/hello.js --name hello -i max
-#  become_user: vagrant
-#  when: pm2_list.stdout.find('hello') == -1
-
-#  - name: Create Swarm!
-#    shell: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[2] }}
 
 #  - name: Init a new swarm with default parameters
 #    docker_swarm:
 #      state: present
 
-#  - name: Copy docker-compose.yml file to create stack DESAFIO
-#    copy:
-#      src: /etc/docker/dockerfiles/solucao/docker-compose.yml
-#      dest: /etc/docker/dockerfiles/solucao/docker-compose.yml
-
-#  - name: Copy config.toml file for Traefik
-#    copy:
-#      src: /etc/docker/dockerfiles/solucao/config.toml
-#      dest: /etc/docker/dockerfiles/solucao/config.toml
-
-#  - name: deploy DESAFIO stack from file /etc/docker/dockerfiles/solucao/docker-compose.yml
-#    shell: docker stack deploy --compose-file docker-compose.yml DESAFIO
-#    args:
-#      chdir: /etc/docker/dockerfiles/solucao
 
 #  - name: deploy DESAFIO stack from file
 #    docker_stack:
 #      state: present
-#      name: DESAFIO
+#      name: AgileDevOps
 #      compose:
 #      - /etc/docker/dockerfiles/solucao/docker-compose.yml
 
-#  - name: Copy script testservices.sh to /etc/crontabscripts
-#    copy:
-#      src: /etc/ansible/files/scripts/testservices.sh
-#      dest: /etc/crontabscripts
-#      owner: root
-#      group: root
-#      mode: u=rwx,g=r,o=r
-#    notify: restart cron
+  - name: Copy script testservices.sh to /etc/crontabscripts
+    copy:
+      src: /etc/ansible/files/scripts/testservices.sh
+      dest: /etc/crontabscripts
+      owner: root
+      group: root
+      mode: u=rwx,g=r,o=r
+    notify: restart cron
 
   handlers:
   - name: restart cron
