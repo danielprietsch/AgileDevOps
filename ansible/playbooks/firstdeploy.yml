@@ -29,31 +29,54 @@
     name: docker
     state: started
 
-- name: Collecting info from docker info command ... Swarm UP?
-  command: docker info
-  register: docker_info
+# Old Code
+#####################################
+#- name: Swarm Init
+#  command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[-1] }}
+#  when: "docker_info.stdout.find('Swarm: active') == -1"
 
-- name: Swarm Init
-  command: docker swarm init --advertise-addr {{ ansible_all_ipv4_addresses[-1] }}
-  when: "docker_info.stdout.find('Swarm: active') == -1"
+#- name: Collecting info from docker network ls command ... Swarm UP?
+#  command: docker network ls
+#  register: docker_network_ls
 
-- name: Collecting info from docker network ls command ... Swarm UP?
-  command: docker network ls
-  register: docker_network_ls
+#- name: Creating docker network webgateway --scope swarm
+#  command: docker network create webgateway --scope swarm
+#  when: "docker_network_ls.stdout.find('webgateway') == -1"
+################################################################
 
-- name: Creating docker network webgateway --scope swarm
-  command: docker network create webgateway --scope swarm
-  when: "docker_network_ls.stdout.find('webgateway') == -1"
+- name: Init a new swarm with default parameters
+  docker_swarm:
+    advertise_addr: "{{ ansible_all_ipv4_addresses[-1] }}"
+    state: present
+
+- name: Create a network webgateway
+  docker_network:
+    state: present
+    name: webgateway
+    driver: overlay
 
 - name: Copy docker-compose.yml file to create stack AgileDevOps
   copy:
     src: ../../docker/dockerfiles/AgileDevOps/docker-compose.yml
     dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
+# Need change this...
 - name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
   shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
   args:
     chdir: /etc/docker/dockerfiles/AgileDevOps
+
+# TO this... but Getting errors... 
+#- name: deploy AgileDevOps
+#  docker_stack:
+#    state: present
+#    name: AgileDevOps
+#    compose:
+#      -  /etc/docker/dockerfiles/AgileDevOps
+
+- name: Collecting info from docker info command ... Swarm UP?
+  command: docker info
+  register: docker_info
 
 - name: Killing all contairners to restart with new app
   shell: docker kill $(docker ps -q)

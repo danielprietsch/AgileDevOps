@@ -11,69 +11,20 @@
   - name: Update apt cache.
     apt: update_cache=yes cache_valid_time=3600
 
-  - name: Installing git, apt-transport-https, ca-certificates, curl, software-properties-common, 
+  - name: Installing git 
     apt:
-      name: ["git", "apt-transport-https", "ca-certificates", "curl", "software-properties-common"] 
+      name: ["git"] 
       state: latest
 
-  - name: Add Dockers official GPG key
-    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-  - name: apt-key fingerprint 0EBFCD88
-    shell: apt-key fingerprint 0EBFCD88
-
-  - name: Copy apt-key.sh script for docker installation
-    copy:
-      src: ../files/scripts/aptkey.sh
-      dest: /tmp
-      mode: 0700
-
-  - name: run /tmp/aptkey.sh
-    shell: /tmp/aptkey.sh
-
-  - name: Update apt cache.
-    apt: update_cache=yes cache_valid_time=3600
-
-  - name: apt-get install  docker-ce 
-    apt:
-      name: ["docker-ce"]
-      state: latest
-
-#  - name: installing docker compose 
-#    shell: curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-
-#  - name: chmod docker-compose
-#    shell: chmod +x /usr/local/bin/docker-compose
-
-#  - name: chmod docker-compose
-#    shell: cp -f /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-#  - name: Install the version '18.09' of package "docker"
-#    apt:
-#      name: docker=18.09
-
-#  - name: upgrade pip
-#    pip: 
-#      name: pip
-#      state: latest
-
-#  - name: Preventing erros on pip install -  export LC_ALL=C
-#    shell: export LC_ALL=C
-
-#  - name: Install pip docker
-#    pip:
-#      name: docker 
-#      state: latest
-
-# sudo apt-get install docker-compose=1.8.*
-#- name: Install docker-compose
-#  apt:
-#    name: docker-compose=1.8.*
-#    state: present
-#    update_cache: yes
-
+  vars:
+    pip_install_packages:
+      - name: docker
+      - name: jsondiff
+      - name: pyyaml
   roles:
   #  - geerlingguy.ntp
+    - geerlingguy.pip
+    - geerlingguy.docker
     - geerlingguy.postfix
 
   vars_files:
@@ -90,6 +41,8 @@
       dest: /etc/crontab
     notify: restart cron
 
+
+# Need a decent log parser from Traefi :(
   - name: Copy script TRAEFIK LOGGER COUNT
     copy:
       src: ../files/scripts/traefiklogger.sh
@@ -99,22 +52,9 @@
       mode: u=rwx,g=r,o=r
 #    notify: restart cron
 
-
-#  - name: Init a new swarm with default parameters
-#    docker_swarm:
-#      state: present
-
-
-#  - name: deploy DESAFIO stack from file
-#    docker_stack:
-#      state: present
-#      name: AgileDevOps
-#      compose:
-#      - /etc/docker/dockerfiles/solucao/docker-compose.yml
-
   - name: Copy script testservices.sh to /etc/crontabscripts
     copy:
-      src: ../files/scripts/testservices.sh
+      src: /etc/ansible/files/scripts/testservices.sh
       dest: /etc/crontabscripts
       owner: root
       group: root
