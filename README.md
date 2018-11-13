@@ -1,4 +1,4 @@
-# AgileDevOps Solution v1.0
+# AgileDevOps Solution v1.1
 
 AVAILABLE:
 
@@ -162,7 +162,9 @@ Tree Directoryies:
  http://nuvemtecnologia.com
  
  # Need help with:
-# - HTTPS SSL Certificates and Redirecting
 # - Copy the Traefik logs to volume in Linux (not in container)
 # - Parse Traefik logs?
 # - Creating a real Jenkins test.
+
+Updates:
+1.1:  HTTPS Working with a invalid crt
