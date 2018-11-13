@@ -1,4 +1,5 @@
-# AgileDevOps Solution v1.1
+# AgileDevOps Solution
+version: 1.1
 
 AVAILABLE:
 
