@@ -74,7 +74,7 @@
 #    compose:
 #      -  /etc/docker/dockerfiles/AgileDevOps
 
-- name: Collecting info from docker info command ... Swarm UP?
+- name: Verifying running containers
   command: docker info
   register: docker_info
 

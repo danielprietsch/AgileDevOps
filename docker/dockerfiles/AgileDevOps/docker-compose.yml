@@ -30,12 +30,10 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-
   nodejs:
-    image: danielprietsch/nodejs
+    image: danielprietsch/alpinenodehello
     volumes:
       - /etc/docker/volumes/NodeApp:/data
-
     networks:
       - traefik
     deploy:
@@ -47,10 +45,10 @@ services:
         - "traefik.port=3000"
         - "traefik.backend=/"
         - "traefik.frontend.rule=Path:/"
-        
 networks:
   webgateway:
     driver: overlay
     external: true
   traefik:
     driver: overlay
+

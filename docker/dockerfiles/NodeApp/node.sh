@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 cd /data
 yarn install
-nodejs hello.js
+node hello.js
 
