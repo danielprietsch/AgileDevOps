@@ -1,5 +1,5 @@
 # AgileDevOps Solution
-Version: 1.1
+Version: 1.2
 
 Available: Ubuntu 18.04.1 LTS bionic
 
@@ -11,7 +11,7 @@ NOTE: The Jenkins build process is still just a simulation, I'm also working on 
 Helps are very welcome! :D
 
 AUTOMATIZED PROCEDURE: 
-Starts Ansible Playbook botstrap.yml ... >>  
+Starts Ansible Playbook bootstrap.yml ... >>  
 Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >>
 Configuring Docker Swarm Manager ... >> 
 Starting Playbook firstdeploy.yml ...>>
@@ -180,4 +180,5 @@ Tree Directoryies:
 
 Updates:
 
-1.1:  HTTPS Working with a invalid crt
+1.1: HTTPS Working with a invalid crt.
+1.2: Ansible codes using docker modules.
