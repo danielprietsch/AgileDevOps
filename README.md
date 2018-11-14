@@ -40,13 +40,13 @@ Nodejs APP Starting... OK!
 
 Uncomment this line:
 
-    # vi /etc/ssh/sshd_config
+    $ vi /etc/ssh/sshd_config
     
     PasswordAuthentication yes
 
 3.1 - Install Python for the Ansible can work
 
-    # apt-get install python
+    $ apt-get install python
 
 # On your Ansible Machine (Ansible Controller Host)
 
@@ -60,18 +60,18 @@ Uncomment this line:
     
 4.1 - Install python libraries:
 
-    # pip install jsondiff
-    # pip install pyyaml
-    # pip install docker-py
+    $ pip install jsondiff
+    $ pip install pyyaml
+    $ pip install docker-py
 
     
 5- Download the git repository AgileDevOps Solution in your Linux /tmp:
 
-    # git clone https://github.com/danielprietsch/AgileDevOps.git /tmp/AgileDevOps
+    $ git clone https://github.com/danielprietsch/AgileDevOps.git /tmp/AgileDevOps
 
 6- Edit and save the file /tmp/AgileDevOps/ansible/hosts and include your VM Machine IP:
 
-    # vi /tmp/AgileDevOps/ansible/hosts
+    $ vi /tmp/AgileDevOps/ansible/hosts
 
     [agiledevops]
     MY_VM_IP
@@ -82,13 +82,13 @@ Uncomment this line:
 
 7 - Got to /tmp/AgileDevOps
 
-    # cd /tmp/AgileDevOps
+    $ cd /tmp/AgileDevOps
 
 8 - Run the playbook bootstrap.yml with the parameters above:
 
 NOTE: VAULT PASSWORD = 123456 
 
-     # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
+     $ ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
 # IMPORTANT: Wait for the docker images to download, this may take about 1-5 minutes depending on your connection.
 
@@ -101,27 +101,27 @@ NOTE: VAULT PASSWORD = 123456
 
 9 - To run a deploy without running the basics tasks in bootstrap, run only the deploy.yml playbook:
 
-    # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
+    $ ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
 10 - To perform the rollback to the previous version of the NodeApp application in the GIT (HEAD~), run the playbook below:
 
-    # ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
+    $ ansible-playbook -i ansible/hosts ansible/playbooks/rollback.yml --ask-pass -u vagrant
 
 11 - To permanent scale the nodejs container to 10 instances:
 Edit the /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
-    # vi /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
+    $ vi /tmp/AgileDevOps/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
 Change the line:
 
-    # replicas: 2 
+    $ replicas: 2 
 to
 
-    # replicas: 10 
+    $ replicas: 10 
     
 ... and run the STEP #9 again
     
-    # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
+    $ ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
 12 - You can set up the role  geerlingguy.ntp to change the timezone and configure to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
 
