@@ -30,13 +30,13 @@ Nodejs APP Starting... OK!
 
 # Creating Environment
 
-1- Create the virtual machine for the AgileDevOps Solution on your Partner or locally (Azure, AWS, Vagrant, VirtualBox, etc...)
+1- Create the virtual machine for the AgileDevOps Solution on your Partner or locally (Azure, AWS, Vagrant, VirtualBox, etc...):
 
 # On the remote VM
 
-2- Create the user "vagrant" for SSH access and verify if it has IP connectivity and redirect inbound ports 22 (ssh), 443 (https) and 80 (http) and 8080 (traefik panel) for this server;
+2- Create the user "vagrant" for SSH access and verify if it has IP connectivity and redirect inbound ports 22 (ssh), 443 (https) and 80 (http) and 8080 (traefik panel) for this server:
 
-3 - Install Python on your virtual Machine and enabled the ssh Password authentication:
+3 - Enabled the ssh Password authentication:
 
 Uncomment this line:
 
@@ -44,15 +44,22 @@ Uncomment this line:
     
     PasswordAuthentication yes
 
-Install Python for the Ansible can work
+3.1 - Install Python for the Ansible can work
 
     # apt-get install python
 
-# On your Machine (Ansible Controller)
+# On your Machine (Ansible Host Controller)
 
-4- Install Ansible (Controller) on your Linux.
+4- Install Ansible and Python on your Linux:
 
     # apt-get install ansible
+    
+4.1 - Install python libraries:
+
+    # pip install jsondiff
+    # pip install pyyaml
+    # pip install docker-py
+
     
 5- Download the git repository AgileDevOps Solution in your Linux /tmp:
 
@@ -74,7 +81,8 @@ Install Python for the Ansible can work
     # cd /tmp/AgileDevOps
 
 8 - Run the playbook bootstrap.yml with the parameters above:
-VAULT PASSWORD = 123456 
+
+NOTE: VAULT PASSWORD = 123456 
 
      # ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
