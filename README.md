@@ -111,7 +111,7 @@ to
     
     # ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
-12 - You can set up the role  geerlingguy.ntp to chance the timezone to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
+12 - You can set up the role  geerlingguy.ntp to change the timezone and configure to America/Sao_Paulo on the ansible/playbooks/bootstrap.yml by uncomment this role;
 
 ====================================================
 
