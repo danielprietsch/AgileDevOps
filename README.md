@@ -38,6 +38,8 @@ Nodejs APP Starting... OK!
 
 3 - Enabled the ssh Password authentication:
 
+NOTE: You can configure your SSH KEYs if you want.
+
 Uncomment this line:
 
     $ vi /etc/ssh/sshd_config
