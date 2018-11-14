@@ -48,11 +48,15 @@ Uncomment this line:
 
     # apt-get install python
 
-# On your Machine (Ansible Host Controller)
+# On your Machine (Ansible Controller Host)
 
-4- Install Ansible and Python on your Linux:
+4- Install Ansible on your Linux (Ansible Controller Host):
 
-    # apt-get install ansible
+    $ sudo apt-get update
+    $ sudo apt-get install software-properties-common
+    $ sudo apt-add-repository ppa:ansible/ansible
+    $ sudo apt-get update
+    $ sudo apt-get install ansible
     
 4.1 - Install python libraries:
 
