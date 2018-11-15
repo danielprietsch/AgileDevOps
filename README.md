@@ -23,6 +23,11 @@ Nodejs APP Starting... OK!
 ![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
 
+# Expectative from 2.0 version, the user will select which orchestrator to use in their tests and studies. Can you help us get there?
+
+![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw2.0.png)
+
+
 ============================
 
 
