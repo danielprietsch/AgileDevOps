@@ -5,20 +5,14 @@ Available: Ubuntu 18.04.1 LTS bionic
 
 # OVERVIEW
 
-The AgileDevOps solution aims to create the entire workflow, tests and build of the NODEJS application (hello.js) until its deploy. Provisioning docker containers in swarm mode (cluster), where Traefik performs load balancing and reverse proxy. 
-This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. 
-NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature.
-Helps are very welcome! :D
+The AgileDevOps solution aims to enable the instant creation of a test environment for provisioning services/micro-services for the practice of everyday actions.
 
-AUTOMATIZED PROCEDURE: 
-Starts Ansible Playbook bootstrap.yml ... >>  
-Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >>
-Configuring Docker Swarm Manager ... >> 
-Starting Playbook firstdeploy.yml ...>>
-Starting AgileDevOps Solution ... >> 
-Git >  Jenkins Simulated Task > Docker >  Swarm Cluster > Traefik (Balancer + Reverse Proxy + Logs) >>
-Nodejs APP Starting... OK! 
-\o/  :D
+The current version 1.2 of the solution provides the creation of a Linux VM Ubuntu 18.04 with docker containers running the nodejs application "hello.js", which basically says the name of the container that is being triggered. Routed via reverse proxy and balanced by Traefik.
+
+NOTE: This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature. Helps are very welcome! : D
+
+AUTOMATIZED PROCEDURE: Starts Ansible Playbook bootstrap.yml ... >>
+Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >> Configuring Docker Swarm Manager ... >> Starting Playbook firstdeploy.yml ... >> Starting AgileDevOps Solution ... >> Git> Jenkins Simulated Task> Docker> Swarm Cluster> Traefik (Balancer + Reverse Proxy + Logs) >> Nodejs APP Starting ... OK! \ O /: D
  
 ![alt text](https://raw.githubusercontent.com/danielprietsch/AgileDevOps/master/draw.png)
 
