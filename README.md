@@ -199,6 +199,6 @@ Tree Directoryies:
 
 Updates:
 
-1.1: HTTPS Working with a invalid crt.
+1.1: https://"SWARM-MANAGER-IP" Working with a invalid crt.
 
 1.2: Ansible codes using docker modules.
