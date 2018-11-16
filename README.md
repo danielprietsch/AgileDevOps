@@ -3,6 +3,8 @@ Version: 1.2
 
 Available: Ubuntu 18.04.1 LTS bionic
 
+Requirements: Virtual Machine for Tests with 1GB disk Space and 1GB RAM.
+
 # OVERVIEW
 
 The AgileDevOps solution aims to enable the instant creation of a test environment for provisioning services/micro-services for the practice of everyday actions.
