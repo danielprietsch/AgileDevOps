@@ -83,7 +83,7 @@ Uncomment this line:
     [agiledevops]
     192.168.20.21
 
-7 - Got to /tmp/AgileDevOps
+7 - Go to /tmp/AgileDevOps
 
     $ cd /tmp/AgileDevOps
 
