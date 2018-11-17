@@ -1,5 +1,5 @@
 # AgileDevOps Solution
-Version: 1.2
+Version: 1.2.1
 
 Available: Ubuntu 18.04.1 LTS bionic
 
@@ -198,3 +198,4 @@ Updates:
 1.1: NODEJS Application "hello.js" ( https://"SWARM-MANAGER-IP" ) Running with a invalid crt.
 
 1.2: Ansible codes using docker modules.
+1.2.1: Adjusting role bugs, and added netdata dynamic installation with netdata.conf.j2
