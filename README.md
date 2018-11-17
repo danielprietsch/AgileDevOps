@@ -198,4 +198,5 @@ Updates:
 1.1: NODEJS Application "hello.js" ( https://"SWARM-MANAGER-IP" ) Running with a invalid crt.
 
 1.2: Ansible codes using docker modules.
-1.2.1: Adjusting role bugs, and added netdata dynamic installation with netdata.conf.j2
+
+1.2.1: Adjusting role bugs, and added netdata dynamic installation with netdata.conf.j2.
