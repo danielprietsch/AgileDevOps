@@ -38,7 +38,7 @@
 
   - name: Init a new swarm with default parameters
     docker_swarm:
-      advertise_addr: "{{ ansible_all_ipv4_addresses[-1] }}"
+      advertise_addr: "{{ ansible_default_ipv4.address }}"
       state: present
 
   - name: Create a network webgateway

@@ -11,27 +11,33 @@
   - name: Update apt cache.
     apt: update_cache=yes cache_valid_time=3600
 
-  - name: Installing git 
+  - name: Installing git and netdata
     apt:
-      name: ["git"] 
+      name: ["git", "netdata"] 
       state: latest
 
-  vars:
-    pip_install_packages:
-      - name: docker
-      - name: jsondiff
-      - name: pyyaml
+#  vars:
+#    pip_install_packages:
+#      - name: docker
+#      - name: jsondiff
+#      - name: pyyaml
   roles:
   #  - geerlingguy.ntp
-    - geerlingguy.pip
-    - geerlingguy.docker
-    - geerlingguy.postfix
+    - ../roles/geerlingguy.pip
+    - ../roles/geerlingguy.docker
+    - ../roles/geerlingguy.postfix
 
   vars_files:
     - ../../ansible/vault/secret.yml
 
   post_tasks:
-  
+ 
+  - name: Setting netdata IPV4 address
+    template:
+      src: ../files/netdata.conf.j2
+      dest: /etc/netdata/netdata.conf
+      mode: 0644
+ 
   - name: Creates directory for crontab scripts /etc/crontabscripts
     file: path=/etc/crontabscripts state=directory
 
@@ -39,7 +45,7 @@
     copy:
       src: ../files/crontab
       dest: /etc/crontab
-    notify: restart cron
+    #notify: restart cron
 
 
 # Need a decent log parser from Traefi :(
@@ -60,6 +66,11 @@
       group: root
       mode: u=rwx,g=r,o=r
     notify: restart cron
+
+  - name: restart netdata
+    service:
+      name: netdata
+      state: restarted
 
   handlers:
   - name: restart cron
