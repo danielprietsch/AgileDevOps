@@ -16,11 +16,6 @@
       name: ["git", "netdata"] 
       state: latest
 
-#  vars:
-#    pip_install_packages:
-#      - name: docker
-#      - name: jsondiff
-#      - name: pyyaml
   roles:
   #  - geerlingguy.ntp
     - ../roles/geerlingguy.pip
