@@ -70,9 +70,9 @@ Uncomment this line:
 
     $ apt-get install python
 
-# On your Ansible Machine (Ansible Controller Host)
+# On the VM2 (your Ansible Controller Host)
 
-4- Install Ansible (Ansible Controller Host):
+4- Install Ansible:
 
     $ sudo apt-get update
     $ sudo apt-get install software-properties-common
@@ -108,7 +108,7 @@ Uncomment this line:
 
 8 - Run the playbook bootstrap.yml with the parameters above:
 
-NOTE: VAULT PASSWORD = 123456 
+# ANSIBLE-VAULT PASSWORD = 123456 
 
      $ ansible-playbook -i ansible/hosts ansible/playbooks/bootstrap.yml --ask-pass --ask-vault-pass -u vagrant
 
