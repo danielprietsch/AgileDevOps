@@ -8,7 +8,7 @@
       repo: 'https://github.com/danielprietsch/NodeApp.git'
       dest: /tmp/Jenkins
       force: yes
-      version: HEAD~
+      version: HEAD
 
   - name: "SIMULATING JENKINS OPERATION: Testing NodeApp.. Ok... Copying to Builded Directory" 
     shell: cp -rf /tmp/Jenkins/* /etc/docker/volumes/Jenkins/
@@ -38,7 +38,7 @@
 
   - name: Init a new swarm with default parameters
     docker_swarm:
-      advertise_addr: "{{ ansible_all_ipv4_addresses[-1] }}"
+      advertise_addr: "{{ ansible_default_ipv4.address }}"
       state: present
 
   - name: Create a network webgateway
@@ -47,16 +47,29 @@
       name: webgateway
       driver: overlay
 
+
   - name: Copy docker-compose.yml file to create stack AgileDevOps
     copy:
       src: ../../docker/dockerfiles/AgileDevOps/docker-compose.yml
       dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
-  # Need change this poor code...
-  - name: Rollbacking... reloading... AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
-    shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
-    args:
-      chdir: /etc/docker/dockerfiles/AgileDevOps
+  - name: Copy docker-compose.yml file to create stack giropops-monitoring
+    copy:
+      src: ../../docker/dockerfiles/giropops-monitoring
+      dest: /etc/docker/dockerfiles/
+      directory_mode:
+
+  - name: JINJA2 prometheus.yml.j2 -  prometheus.yml
+    template:
+      src: ../../ansible/files/prometheus.yml.j2
+      dest: /etc/docker/dockerfiles/giropops-monitoring/conf/prometheus/prometheus.yml
+      mode: 0644
+
+# Need change this...
+- name: Rollbacking... reloading... AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
+  shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
+  args:
+    chdir: /etc/docker/dockerfiles/AgileDevOps
 
 # TO this... but Getting errors... 
 #- name: deploy AgileDevOps
@@ -66,7 +79,7 @@
 #    compose:
 #      -  /etc/docker/dockerfiles/AgileDevOps
 
-  - name: Verifying running containers
+  - name: Verify running containers
     command: docker info
     register: docker_info
 
@@ -74,3 +87,4 @@
     shell: docker kill $(docker ps -q)
     when: "docker_info.stdout.find('Running: 0') == -1"
 
+   

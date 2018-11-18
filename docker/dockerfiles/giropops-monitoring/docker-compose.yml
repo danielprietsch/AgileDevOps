@@ -49,7 +49,7 @@ services:
     deploy:
       mode: global
     ports:
-      - 8888:8080
+      - 8080:8080
 
   grafana:
     image: nopp/grafana_alpine
@@ -78,10 +78,10 @@ services:
 #      - MAIL_URL=smtp://user:pass@smtp.email
 #      - HTTP_PROXY=http://proxy.domain.com
 #      - HTTPS_PROXY=http://proxy.domain.com
-    depends_on:
-      - mongo
-    ports:
-      - 3080:3080
+#    depends_on:
+#      - mongo
+#    ports:
+#      - 3080:3080
 
 #  mongo:
 #    image: mongo:3.2

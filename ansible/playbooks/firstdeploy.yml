@@ -60,11 +60,30 @@
     src: ../../docker/dockerfiles/AgileDevOps/docker-compose.yml
     dest: /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
 
+- name: Copy docker-compose.yml file to create stack giropops-monitoring
+  copy:
+    src: ../../docker/dockerfiles/giropops-monitoring
+    dest: /etc/docker/dockerfiles/
+    directory_mode:
+
+- name: JINJA2 prometheus.yml.j2 -  prometheus.yml
+  template:
+    src: ../../ansible/files/prometheus.yml.j2
+    dest: /etc/docker/dockerfiles/giropops-monitoring/conf/prometheus/prometheus.yml
+    mode: 0644
 # Need change this...
+
 - name: deploy/reload AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
   shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
   args:
     chdir: /etc/docker/dockerfiles/AgileDevOps
+
+# Need change this...
+- name: deploy/reload giropops-monitoring stack from file /etc/docker/dockerfiles/giropops-monitoring/docker-compose.yml
+  shell: docker stack deploy --compose-file docker-compose.yml giropops
+  args:
+    chdir: /etc/docker/dockerfiles/giropops-monitoring
+
 
 # TO this... but Getting errors... 
 #- name: deploy AgileDevOps

@@ -27,7 +27,7 @@
 
   post_tasks:
  
-  - name: Setting netdata IPV4 address
+  - name: JINJA2  netdata.conf.j2 - netdata.conf
     template:
       src: ../files/netdata.conf.j2
       dest: /etc/netdata/netdata.conf

@@ -24,4 +24,4 @@ scrape_configs:
     honor_labels: true
     scrape_interval: 5s
     static_configs:
-         - targets: ['{{ ansible_all_ipv4_addresses[-1] }}:19999']
+         - targets: ['{{ ansible_default_ipv4.address }}:19999']
