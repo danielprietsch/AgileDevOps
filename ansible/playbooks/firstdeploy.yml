@@ -97,7 +97,7 @@
   command: docker info
   register: docker_info
 
-- name: Killing all contairners to restart with new app
+- name: Killing all containers to restart with new app
   shell: docker kill $(docker ps -q)
   when: "docker_info.stdout.find('Running: 0') == -1"
 
