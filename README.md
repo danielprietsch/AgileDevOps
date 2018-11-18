@@ -96,7 +96,7 @@ Uncomment this line:
     $ vi /tmp/AgileDevOps/ansible/hosts
 
     [agiledevops]
-    MY_VM_IP
+    #PUT THE VM2 IP HERE
 
     Example:
     [agiledevops]
@@ -118,22 +118,21 @@ Uncomment this line:
 
 # nodejs App
 
-    http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
-    http://REMOTE-VM-IP:8080 (Traefik Panel)
+    http://VM2ip (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
+    http://VM2ip:8080 (Traefik Panel)
  
 # To access Prometheus interface on browser:
 
-    http://YOUR_IP:9090
+    http://VM2ip:9090
 
 # To access AlertManager interface on browser:
 
-    http://YOUR_IP:9093
+    http://VM2ip:9093
 
 # To access Grafana interface on browser:
-
-    http://YOUR_IP:3000
-    user: admin
-    passwd: giropops
+# user: admin
+# passwd: giropops
+    http://VM2ip:3000
 
 To add plugs edit file giropops-monitoring/grafana.config
 GF_INSTALL_PLUGINS=plug1,plug2
@@ -142,7 +141,7 @@ Have fun, access the dashboards! ;)
 
 # To access Netdata interface on browser:
 
-    http://YOUR_IP:19999
+    http://VM2ip:19999
 
 # To access Prometheus Node_exporter metrics on browser:
 
