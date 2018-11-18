@@ -39,13 +39,21 @@ Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >> Conf
 2- Create the user "vagrant" and a password for SSH access and verify if it has IP connectivity and redirect inbound ports to this server/VM:
 
 22 (ssh),
+
 443 (https),
+
 80 (http),
+
 8081 (traefik panel),
+
 3000 (Grafana),
+
 9100 (node-exporter),
+
 9090 (Prometheus),
+
 8080 (cadvisor),
+
 9093 (alertmanager). 
 
 3 - Enabled the ssh Password authentication:
