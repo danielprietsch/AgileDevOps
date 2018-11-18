@@ -3,7 +3,7 @@
   become: true
   pre_tasks: 
 
-  - name: Configure apt-get to use IPV4 because some errors on apt-get update
+  - name: Configure apt-get to use IPV4 - for vagrant bridges 
     copy:
       src: ../files/99force-ipv4
       dest: /etc/apt/apt.conf.d/99force-ipv4
