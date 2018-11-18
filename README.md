@@ -1,9 +1,7 @@
-# AgileDevOps Solution
+# AgileDevOps Solution - Version: 1.2.2
 
 # Slack Channel
 https://agiledevopssolution.slack.com/messages/CE7RU725C/apps/AE694A2F6/
-
-# Version: 1.2.2
 
 Available: Ubuntu 18.04.1 LTS bionic
 
