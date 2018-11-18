@@ -1,5 +1,9 @@
 # AgileDevOps Solution
-Version: 1.2.2
+
+# Slack Channel
+https://agiledevopssolution.slack.com/messages/CE7RU725C/apps/AE694A2F6/
+
+# Version: 1.2.2
 
 Available: Ubuntu 18.04.1 LTS bionic
 
@@ -121,6 +125,10 @@ Uncomment this line:
     http://VM2ip (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
     http://VM2ip:8080 (Traefik Panel)
  
+# View ALERTS ON SLACK CHANNEL #alerts:
+
+    https://agiledevopssolution.slack.com/messages/CE5MSRMFS/apps/AE694A2F6/
+
 # To access Prometheus interface on browser:
 
     http://VM2ip:9090
