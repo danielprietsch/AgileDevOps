@@ -1,9 +1,9 @@
 # AgileDevOps Solution
-Version: 1.2.1
+Version: 1.2.2
 
 Available: Ubuntu 18.04.1 LTS bionic
 
-Requirements: Virtual Machine for Tests with 1GB disk Space and 1GB RAM.
+Requirements: Virtual Machine for Tests with 3GB disk Space and 1GB RAM.
 
 # OVERVIEW
 
@@ -209,6 +209,7 @@ Tree Directoryies:
             NodeApp:
                 Dockerfile: Used to build the image, see this on https://hub.docker.com/r/danielprietsch/nodejs/
                 node.sh: Script started by the image
+            giropops-monitoring: Doc >> https://github.com/badtuxx/giropops-monitoring
                 
         volumes:
             Jenkins: Simulating the Jenkins build
