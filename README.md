@@ -96,13 +96,51 @@ NOTE: VAULT PASSWORD = 123456
 # IMPORTANT: Wait for the docker images to download, this may take about 1-5 minutes depending on your connection.
 
 # TEST NOW! \o/
-        # http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
-        # http://REMOTE-VM-IP:8080 (Traefik Panel)
+
+# nodejs App
+
+    http://REMOTE-VM-IP (press F5 to view the Traefik Load Balancing MAGIC HAPPENS!
+    http://REMOTE-VM-IP:8080 (Traefik Panel)
+ 
+# To access Prometheus interface on browser:
+
+    http://YOUR_IP:9090
+
+# To access AlertManager interface on browser:
+
+    http://YOUR_IP:9093
+
+# To access Grafana interface on browser:
+
+    http://YOUR_IP:3000
+    user: admin
+    passwd: giropops
+
+To add plugs edit file giropops-monitoring/grafana.config
+GF_INSTALL_PLUGINS=plug1,plug2
+Current plugs grafana-clock-panel,grafana-piechart-panel,camptocamp-prometheus-alertmanager-datasource,vonage-status-panel
+Have fun, access the dashboards! ;)
+
+# To access Netdata interface on browser:
+
+    http://YOUR_IP:19999
+
+# To access Prometheus Node_exporter metrics on browser:
+
+    http://YOUR_IP:9100/metrics
+
+# docker service rm giropops_node-exporter
+
+Wait some seconds and you will see the integration works fine! Prometheus alerting the AlertManager that alert the Slack that shows it to you! It's so easy and that simple! :D
+
+# Of course, create new alerts on Prometheus:
+
+    $ vim conf/prometheus/alert.rules
 
 
 # OPTIONAL:
 
-9 - To run a deploy without running the basics tasks in bootstrap, run only the deploy.yml playbook:
+9 - To run another deploy after the bootstrap.yml, run only the deploy.yml playbook:
 
     $ ansible-playbook -i ansible/hosts ansible/playbooks/deploy.yml --ask-pass -u vagrant
 
@@ -178,25 +216,35 @@ Tree Directoryies:
                  hello.js: Nodejs + Express App;
                  package.json: Including express depencies to npm/yarn install;
                  node_modules: All modules downloaded by npm/yarn
-              
- Author: Daniel Prietsch
+ 
+ 
+ # Author: Daniel Prietsch
 
  daniel@nuvemtecnologia.com
 
  http://nuvemtecnologia.com
  
 
- Need help with:
+ # Need help with:
  
 - Copy the Traefik logs to volume in Linux (not in container)
 - Parse Traefik logs?
 - Creating a real Jenkins test.
 
+# Many Thanks to:
 
-Updates:
+Jefferson (LinuxTips): by the giropops-monitoring (https://github.com/badtuxx/giropops-monitoring)
+
+Michael Hart: by the nodejs image (https://github.com/mhart/alpine-node/issues)
+
+
+# Updates:
 
 1.1: NODEJS Application "hello.js" ( https://"SWARM-MANAGER-IP" ) Running with a invalid crt.
 
 1.2: Ansible codes using docker modules.
 
 1.2.1: Adjusting role bugs, and added netdata dynamic installation with netdata.conf.j2.
+
+1.2.2: Giropops-monitoring added, but the graphics off node-exporter on grafana not working.
+
