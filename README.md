@@ -26,16 +26,27 @@ Installing all softwares used in Solution (git, (jenkins), Docker-ce ... >> Conf
 
 ============================
 
+# VM 1 = Docker Swarm Manager
+# VM 2 = Ansible Controller
+
 
 # STEPS:
 
-# Creating Environment
+#  On the VM 1 (Docker Swarm Manager)
 
-1- Create the virtual machine for the AgileDevOps Solution on your Partner or locally (Azure, AWS, Vagrant, VirtualBox, etc...):
+1- Create the virtual machine (who will be the swarm manager server for the AgileDevOps Solution) on your Partner or locally (Azure, AWS, Vagrant, VirtualBox, etc...):
 
-# On the remote VM
+2- Create the user "vagrant" and a password for SSH access and verify if it has IP connectivity and redirect inbound ports to this server/VM:
 
-2- Create the user "vagrant" for SSH access and verify if it has IP connectivity and redirect inbound ports 22 (ssh), 443 (https) and 80 (http) and 8080 (traefik panel) for this server:
+22 (ssh),
+443 (https),
+80 (http),
+8081 (traefik panel),
+3000 (Grafana),
+9100 (node-exporter),
+9090 (Prometheus),
+8080 (cadvisor),
+9093 (alertmanager). 
 
 3 - Enabled the ssh Password authentication:
 
