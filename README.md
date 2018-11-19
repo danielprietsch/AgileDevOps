@@ -11,7 +11,7 @@ Requirements: Virtual Machine for Tests with 3GB disk Space and 1GB RAM.
 
 The AgileDevOps solution aims to enable the instant creation of a test environment for provisioning services/micro-services for the practice of everyday actions.
 
-The current version provides the instant creation of Docker Swarm Manager with containers running the nodejs application "hello.js", which basically says the name of the container that is being triggered. Routed via reverse proxy and balanced by Traefik.
+The current version provides the instant creation of Docker Swarm Manager monitored by Giropops-monitoring (Netdata + Grafana + Prometheus + Alertmanager + node-exporter) with containers running the nodejs application "hello.js", which basically says the name of the container that is being triggered. Routed via reverse proxy and balanced by Traefik. 
 
 NOTE: This solution only creates the Swarm Managers, the deployment of the Swarm Workers will be created in future versions. NOTE: The Jenkins build process is still just a simulation, I'm also working on deploying this feature. Helps are very welcome! : D
 
