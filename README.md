@@ -82,8 +82,9 @@ Uncomment this line:
     $ sudo apt-get update
     $ sudo apt-get install ansible
     
-4.1 - Install python libraries:
+4.1 - Install pip and python libraries:
 
+    $ apt-get install python-pip
     $ pip install jsondiff
     $ pip install pyyaml
     $ pip install docker-py
