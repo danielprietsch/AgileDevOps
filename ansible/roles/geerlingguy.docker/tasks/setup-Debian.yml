@@ -22,8 +22,13 @@
 #  ignore_errors: "{{ docker_apt_ignore_key_error }}"
 
 - name: Ensure curl is present (on older systems without SNI).
+<<<<<<< HEAD
   apt: 
     name: 
+=======
+  apt:
+    name:
+>>>>>>> ebc0c6cb1ce5dfbf05543f44bdd1703356bc4731
       - curl 
     state: present
 
