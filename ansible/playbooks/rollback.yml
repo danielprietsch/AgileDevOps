@@ -66,10 +66,10 @@
       mode: 0644
 
 # Need change this...
-- name: Rollbacking... reloading... AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
-  shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
-  args:
-    chdir: /etc/docker/dockerfiles/AgileDevOps
+  - name: Rollbacking... reloading... AgileDevOps stack from file /etc/docker/dockerfiles/AgileDevOps/docker-compose.yml
+    shell: docker stack deploy --compose-file docker-compose.yml AgileDevOps
+    args:
+      chdir: /etc/docker/dockerfiles/AgileDevOps
 
 # TO this... but Getting errors... 
 #- name: deploy AgileDevOps
@@ -79,10 +79,10 @@
 #    compose:
 #      -  /etc/docker/dockerfiles/AgileDevOps
 
-- name: Verify running containers
-  command: docker info
-  register: docker_info
+  - name: Verify running containers
+    command: docker info
+    register: docker_info
 
-- name: Killing all containers to restart with new app
-  shell: docker kill $(docker ps -q)
-  when: "docker_info.stdout.find('Running: 0') == -1"
+  - name: Killing all containers to restart with new app
+    shell: docker kill $(docker ps -q)
+    when: "docker_info.stdout.find('Running: 0') == -1"
