@@ -79,12 +79,10 @@
 #    compose:
 #      -  /etc/docker/dockerfiles/AgileDevOps
 
-  - name: Verify running containers
-    command: docker info
-    register: docker_info
+- name: Verify running containers
+  command: docker info
+  register: docker_info
 
-  - name: Killing all containers to restart with new app
-    shell: docker kill $(docker ps -q)
-    when: "docker_info.stdout.find('Running: 0') == -1"
-
-   
+- name: Killing all containers to restart with new app
+  shell: docker kill $(docker ps -q)
+  when: "docker_info.stdout.find('Running: 0') == -1"
