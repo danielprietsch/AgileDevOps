@@ -8,7 +8,7 @@
       repo: 'https://github.com/danielprietsch/NodeApp.git'
       dest: /tmp/Jenkins
       force: yes
-      version: ~HEAD
+      version: HEAD~
 
   - name: "SIMULATING JENKINS OPERATION: Testing NodeApp.. Ok... Copying to Builded Directory" 
     shell: cp -rf /tmp/Jenkins/* /etc/docker/volumes/Jenkins/
